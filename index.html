@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocalDrop Studio - A.I. Audio Separation</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --panel-color: #141414;
+            --border-color: #222222;
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --gold: #D4AF37;
+            --blue: #1A8CFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Nav */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #0A0A0A;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, var(--gold), #F3E5AB);
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-disabled {
+            background-color: #1A1A1A;
+            color: #555;
+            border: 1px solid #333;
+            cursor: not-allowed;
+        }
+
+        /* Features / Pricing (Crucial para Lemon Squeezy) */
+        .pricing {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--panel-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .card.elite {
+            border-color: var(--gold);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .card.elite h3 {
+            color: var(--gold);
+        }
+
+        .card .price {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-bottom: 30px;
+            color: var(--text-muted);
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+        }
+
+        .card ul li::before {
+            content: "✓ ";
+            color: var(--blue);
+            font-weight: bold;
+        }
+
+        .card.elite ul li::before {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            VOCALDROP
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>A.I. Studio Master</h1>
+        <p>Aísla voces, coros e instrumentales de cualquier canción con calidad de estudio utilizando modelos avanzados de Inteligencia Artificial (Whisper & Demucs) directamente en tu ordenador.</p>
+        
+        <div class="buttons">
+            <a href="#" class="btn btn-download">⬇ Descargar Demo para Windows</a>
+            <button class="btn btn-disabled" disabled>Usar Versión Nube (Próximamente)</button>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <h2>Planes y Licencias</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>FAN</h3>
+                <div class="price">3,99€ /mes</div>
+                <ul>
+                    <li>15 Renders al mes</li>
+                    <li>Extracción de 2 Pistas (Voz / Instrumental)</li>
+                    <li>Marca de agua pequeña</li>
+                    <li>Soporte estándar</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>PRO</h3>
+                <div class="price">9,99€ /mes</div>
+                <ul>
+                    <li>30 Renders al mes</li>
+                    <li>Extracción de 4 Pistas</li>
+                    <li>Sin marca de agua</li>
+                    <li>Diarización de voces</li>
+                </ul>
+            </div>
+
+            <div class="card elite">
+                <h3>ELITE .EXE</h3>
+                <div class="price">29,99€ /mes</div>
+                <ul>
+                    <li>Renders Ilimitados (Local)</li>
+                    <li>Extracción de 6 Pistas + Coros (UVR5)</li>
+                    <li>Uso Comercial Permitido</li>
+                    <li>Efectos Visuales y Logos personalizados</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 VocalDrop Studio. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px;">¿Necesitas ayuda? <a href="mailto:soporte@tudominio.com">Contacta con Soporte</a></p>
+    </footer>
+
+</body>
+</html>
