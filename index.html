@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocalDrop Studio | El Futuro de la Separación de Audio por IA</title>
+    <title>VocalDrop Studio | A.I. Audio Studio</title>
     <style>
         :root {
             --bg: #050505;
@@ -15,52 +15,55 @@
             --accent-gold: #D4AF37;
             --accent-purple: #9933FF;
             --accent-cyan: #00FFFF;
+            --accent-red: #FF4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; border-bottom: 1px solid var(--border); background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; letter-spacing: 1px; }
-        .logo img { width: 45px; border-radius: 8px; }
+        nav { display: flex; justify-content: center; align-items: center; padding: 25px; border-bottom: 1px solid var(--border); background: #0A0A0A; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 24px; letter-spacing: 2px; }
+        .logo img { width: 50px; border-radius: 10px; }
 
-        .hero { text-align: center; padding: 120px 20px 60px; max-width: 1000px; margin: 0 auto; }
-        .hero h1 { font-size: 56px; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 18px; color: var(--text-dim); max-width: 700px; margin: 0 auto 40px; }
+        .hero { text-align: center; padding: 80px 20px 40px; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 52px; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .cta-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .btn { padding: 18px 40px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: 0.3s; cursor: pointer; text-transform: uppercase; font-size: 15px; border: none; }
+        .btn-download { background: linear-gradient(45deg, var(--accent-gold), #F3E5AB); color: #000; box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212,175,55,0.4); }
+        .btn-cloud { background: #111; color: #555; border: 1px solid #222; cursor: not-allowed; }
 
-        .cta-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .btn { padding: 16px 35px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: 0.3s; cursor: pointer; text-transform: uppercase; font-size: 14px; border: none; }
-        .btn-gold { background: linear-gradient(45deg, var(--accent-gold), #F3E5AB); color: #000; box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
-        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212,175,55,0.4); }
-        .btn-dark { background: #111; color: #555; border: 1px solid #222; cursor: not-allowed; }
+        /* Requisitos */
+        .requirements { max-width: 800px; margin: 40px auto; background: #0A0A0A; border: 1px solid var(--border); border-radius: 10px; padding: 30px; }
+        .requirements h2 { font-size: 14px; color: var(--accent-gold); letter-spacing: 2px; text-align: center; margin-bottom: 20px; }
+        .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; text-align: center; }
+        .req-item span { display: block; font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+        .req-item b { font-size: 16px; color: #fff; }
 
-        /* Pricing Toggle */
-        .toggle-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 60px 0 30px; }
-        .switch { position: relative; display: inline-block; width: 60px; height: 30px; }
+        /* Pricing */
+        .toggle-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 50px 0 30px; font-weight: bold; }
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
         .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #222; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--accent-blue); }
-        input:checked + .slider:before { transform: translateX(30px); }
+        input:checked + .slider:before { transform: translateX(24px); }
 
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
-        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px 20px; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
-        .card:hover { border-color: #333; transform: translateY(-5px); }
-        .card.featured { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1); }
-        .card.featured::before { content: "RECOMENDADO"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-gold); color: #000; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
-
-        .plan-name { font-size: 12px; font-weight: 800; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 10px; }
-        .price { font-size: 32px; font-weight: 800; margin-bottom: 25px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 5% 80px; max-width: 1400px; margin: 0 auto; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 35px 25px; display: flex; flex-direction: column; transition: 0.3s; }
+        .card:hover { border-color: #444; }
+        .plan-name { font-size: 13px; font-weight: 800; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 5px; }
+        .price { font-size: 36px; font-weight: 800; margin-bottom: 20px; }
         .price span { font-size: 14px; color: var(--text-dim); font-weight: 400; }
         
         .features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
-        .features li { font-size: 13px; color: #ccc; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; }
-        .features li::before { content: "✓"; color: var(--accent-blue); font-weight: bold; }
+        .features li { font-size: 14px; color: #bbb; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .features li::before { content: "•"; color: var(--accent-gold); font-size: 20px; }
 
-        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); margin-top: 100px; color: var(--text-dim); }
-        .save-tag { color: #00FF00; font-size: 12px; font-weight: bold; margin-left: 5px; }
-
-        @media (max-width: 768px) { .hero h1 { font-size: 36px; } }
+        .btn-plan { width: 100%; padding: 12px; border-radius: 4px; font-weight: bold; text-align: center; text-decoration: none; font-size: 13px; transition: 0.2s; }
+        
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; }
     </style>
 </head>
 <body>
@@ -73,22 +76,30 @@
     </nav>
 
     <header class="hero">
-        <h1>Tu Estudio de IA Personal</h1>
-        <p>Aísla voces e instrumentos con precisión quirúrgica. Todo el poder de la IA en tu ordenador, sin suscripciones obligatorias a la nube.</p>
-        
+        <h1>Potencia tu creatividad con IA</h1>
         <div class="cta-group">
-            <a href="#" class="btn btn-gold">⬇ Descargar Demo Gratuita</a>
-            <span class="btn btn-dark">App en la Nube (Próximamente)</span>
+            <a href="#" class="btn btn-download">⬇ Descargar Aplicación (.EXE)</a>
+            <span class="btn btn-cloud">Nube (Próximamente)</span>
         </div>
     </header>
 
+    <section class="requirements">
+        <h2>REQUISITOS MÍNIMOS DEL SISTEMA</h2>
+        <div class="req-grid">
+            <div class="req-item"><span>Procesador</span><b>6 Núcleos o +</b></div>
+            <div class="req-item"><span>Memoria RAM</span><b>16 GB</b></div>
+            <div class="req-item"><span>Gráfica (GPU)</span><b>Nvidia 6GB VRAM</b></div>
+            <div class="req-item"><span>Disco</span><b>SSD</b></div>
+        </div>
+    </section>
+
     <div class="toggle-container">
-        <span>Mensual</span>
+        <span>MENSUAL</span>
         <label class="switch">
             <input type="checkbox" id="billingToggle">
             <span class="slider"></span>
         </label>
-        <span>Anual <span class="save-tag">-20%</span></span>
+        <span>ANUAL <small style="color: #00FF00;">(Ahorra)</small></span>
     </div>
 
     <main class="pricing-grid">
@@ -97,75 +108,92 @@
             <div class="price">0€</div>
             <ul class="features">
                 <li>3 Renders al mes</li>
-                <li>Motor 2 Pistas (Voz/Inst)</li>
+                <li>Uso Básico</li>
                 <li>Marca de agua GRANDE</li>
-                <li>Uso Personal</li>
+                <li>Stems: 2 Pistas</li>
             </ul>
-            <a href="#" class="btn btn-dark" style="color: #fff; cursor: pointer;">Actual</a>
+            <a href="#" class="btn-plan" style="background: #222; color: #fff;">Actual</a>
         </div>
 
-        <div class="card" style="border-color: var(--accent-cyan);">
-            <div class="plan-name" style="color: var(--accent-cyan);">FAN</div>
-            <div class="price"><span class="amount" data-monthly="3.99" data-yearly="3.33">3.99</span>€<span>/mes</span></div>
+        <div class="card" style="border-top: 4px solid var(--accent-cyan);">
+            <div class="plan-name">FAN</div>
+            <div class="price"><span class="amount" data-m="3.99" data-y="39.99">3.99</span>€<span>/mes</span></div>
             <ul class="features">
                 <li>15 Renders al mes</li>
+                <li>Sin Anuncios</li>
                 <li>Marca de agua pequeña</li>
-                <li>Motor 2 Pistas</li>
-                <li>Sin anuncios</li>
+                <li>Stems: 2 Pistas</li>
             </ul>
-            <a href="#" class="btn btn-gold" style="background: var(--accent-cyan);">Elegir Fan</a>
+            <a href="#" class="btn-plan" style="background: var(--accent-cyan); color: #000;">Elegir Plan</a>
         </div>
 
-        <div class="card featured" style="border-color: var(--accent-blue);">
-            <div class="plan-name" style="color: var(--accent-blue);">PRO (ORO)</div>
-            <div class="price"><span class="amount" data-monthly="9.99" data-yearly="8.33">9.99</span>€<span>/mes</span></div>
+        <div class="card" style="border-top: 4px solid var(--accent-blue);">
+            <div class="plan-name">PRO (ORO)</div>
+            <div class="price"><span class="amount" data-m="9.99" data-y="99.99">9.99</span>€<span>/mes</span></div>
             <ul class="features">
                 <li>30 Renders al mes</li>
-                <li><b>Sin marcas de agua</b></li>
-                <li>Motor 4 Pistas (Drums/Bass...)</li>
-                <li>Diarización de 2 voces</li>
+                <li>Sin marca de agua</li>
+                <li>Motor Extracción PRO</li>
+                <li>Stems: 4 Pistas</li>
             </ul>
-            <a href="#" class="btn btn-gold" style="background: var(--accent-blue);">Elegir PRO</a>
+            <a href="#" class="btn-plan" style="background: var(--accent-blue); color: #fff;">Elegir Plan</a>
         </div>
 
-        <div class="card" style="border-color: var(--accent-purple);">
-            <div class="plan-name" style="color: var(--accent-purple);">MASTER</div>
-            <div class="price"><span class="amount" data-monthly="19.99" data-yearly="16.66">19.99</span>€<span>/mes</span></div>
+        <div class="card" style="border-top: 4px solid var(--accent-purple);">
+            <div class="plan-name">MASTER</div>
+            <div class="price"><span class="amount" data-m="19.99" data-y="199.99">19.99</span>€<span>/mes</span></div>
             <ul class="features">
                 <li>150 Renders al mes</li>
-                <li>Exportación 4K Pro</li>
-                <li>Prioridad en cola de render</li>
-                <li>Filtros de Cine premium</li>
+                <li>Calidad 4K Export</li>
+                <li>Filtros de Cine</li>
+                <li>Prioridad en Cola</li>
             </ul>
-            <a href="#" class="btn btn-gold" style="background: var(--accent-purple); color: white;">Elegir Master</a>
+            <a href="#" class="btn-plan" style="background: var(--accent-purple); color: #fff;">Elegir Plan</a>
         </div>
 
-        <div class="card featured">
-            <div class="plan-name" style="color: var(--accent-gold);">ELITE .EXE</div>
-            <div class="price"><span class="amount" data-monthly="29.99" data-yearly="24.99">29.99</span>€<span>/mes</span></div>
+        <div class="card" style="border-top: 4px solid var(--accent-gold);">
+            <div class="plan-name">ELITE</div>
+            <div class="price"><span class="amount" data-m="39.99" data-y="399.99">39.99</span>€<span>/mes</span></div>
             <ul class="features">
-                <li><b>Renders Ilimitados</b></li>
-                <li>6 Pistas + Coros (UVR5)</li>
-                <li>Uso Comercial Completo</li>
-                <li>Control Remoto Móvil</li>
+                <li>Renders Ilimitados</li>
+                <li>Uso Comercial</li>
+                <li>Coros VR-5 AI</li>
+                <li>Stems: 6 Pistas</li>
+                <li>Soporte VIP</li>
             </ul>
-            <a href="#" class="btn btn-gold">Elegir Elite</a>
+            <a href="#" class="btn-plan" style="background: var(--accent-gold); color: #000;">Elegir Plan</a>
+        </div>
+
+        <div class="card" style="background: #110000; border: 1px solid var(--accent-red);">
+            <div class="plan-name" style="color: var(--accent-red);">ELITE .EXE</div>
+            <div class="price"><span class="amount" data-m="29.99" data-y="299.99">29.99</span>€<span>/mes</span></div>
+            <ul class="features">
+                <li><b>Todo lo de Elite</b></li>
+                <li>Renders Ilimitados</li>
+                <li>Software Instalable</li>
+                <li>Procesamiento Local</li>
+                <li>Máxima Privacidad</li>
+            </ul>
+            <a href="#" class="btn-plan" style="background: var(--accent-red); color: #fff;">Elegir .EXE</a>
         </div>
     </main>
 
     <footer>
-        <p>© 2026 VocalDrop Studio | Procesamiento Local de Alta Fidelidad</p>
-        <p style="margin-top: 10px;">¿Dudas? <a href="mailto:soporte@tudominio.com" style="color: var(--accent-gold);">Contacto de Soporte</a></p>
+        <p>© 2026 VocalDrop Studio | Todos los derechos reservados.</p>
     </footer>
 
     <script>
         const toggle = document.getElementById('billingToggle');
         const amounts = document.querySelectorAll('.amount');
+        const periods = document.querySelectorAll('.price span');
         
         toggle.addEventListener('change', () => {
             amounts.forEach(span => {
-                const val = toggle.checked ? span.dataset.yearly : span.dataset.monthly;
+                const val = toggle.checked ? span.dataset.y : span.dataset.m;
                 span.innerText = val;
+            });
+            periods.forEach(p => {
+                p.innerText = toggle.checked ? "/año" : "/mes";
             });
         });
     </script>
