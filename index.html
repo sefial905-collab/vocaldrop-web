@@ -3,262 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VocalDrop Studio - A.I. Audio Separation</title>
+    <title>VocalDrop Studio | El Futuro de la Separación de Audio por IA</title>
     <style>
         :root {
-            --bg-color: #050505;
-            --panel-color: #141414;
-            --border-color: #222222;
-            --text-main: #FFFFFF;
-            --text-muted: #888888;
-            --gold: #D4AF37;
-            --blue: #1A8CFF;
+            --bg: #050505;
+            --panel: #0d0d0d;
+            --border: #1f1f1f;
+            --text: #ffffff;
+            --text-dim: #999999;
+            --accent-blue: #1A8CFF;
+            --accent-gold: #D4AF37;
+            --accent-purple: #9933FF;
+            --accent-cyan: #00FFFF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; border-bottom: 1px solid var(--border); background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; letter-spacing: 1px; }
+        .logo img { width: 45px; border-radius: 8px; }
 
-        /* Nav */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background-color: #0A0A0A;
-            border-bottom: 1px solid var(--border-color);
-        }
+        .hero { text-align: center; padding: 120px 20px 60px; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { font-size: 56px; font-weight: 900; margin-bottom: 20px; background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 18px; color: var(--text-dim); max-width: 700px; margin: 0 auto 40px; }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .cta-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn { padding: 16px 35px; border-radius: 6px; font-weight: 700; text-decoration: none; transition: 0.3s; cursor: pointer; text-transform: uppercase; font-size: 14px; border: none; }
+        .btn-gold { background: linear-gradient(45deg, var(--accent-gold), #F3E5AB); color: #000; box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212,175,55,0.4); }
+        .btn-dark { background: #111; color: #555; border: 1px solid #222; cursor: not-allowed; }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gold);
-            border-radius: 8px;
-            display: inline-block;
-        }
+        /* Pricing Toggle */
+        .toggle-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 60px 0 30px; }
+        .switch { position: relative; display: inline-block; width: 60px; height: 30px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #222; transition: .4s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--accent-blue); }
+        input:checked + .slider:before { transform: translateX(30px); }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
+        .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 30px 20px; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
+        .card:hover { border-color: #333; transform: translateY(-5px); }
+        .card.featured { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(212,175,55,0.1); }
+        .card.featured::before { content: "RECOMENDADO"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-gold); color: #000; font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
+        .plan-name { font-size: 12px; font-weight: 800; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 10px; }
+        .price { font-size: 32px; font-weight: 800; margin-bottom: 25px; }
+        .price span { font-size: 14px; color: var(--text-dim); font-weight: 400; }
+        
+        .features { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .features li { font-size: 13px; color: #ccc; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; }
+        .features li::before { content: "✓"; color: var(--accent-blue); font-weight: bold; }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); margin-top: 100px; color: var(--text-dim); }
+        .save-tag { color: #00FF00; font-size: 12px; font-weight: bold; margin-left: 5px; }
 
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .btn-download {
-            background: linear-gradient(45deg, var(--gold), #F3E5AB);
-            color: #000;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-download:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-        }
-
-        .btn-disabled {
-            background-color: #1A1A1A;
-            color: #555;
-            border: 1px solid #333;
-            cursor: not-allowed;
-        }
-
-        /* Features / Pricing (Crucial para Lemon Squeezy) */
-        .pricing {
-            padding: 50px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--text-muted);
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: var(--panel-color);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: left;
-        }
-
-        .card.elite {
-            border-color: var(--gold);
-        }
-
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .card.elite h3 {
-            color: var(--gold);
-        }
-
-        .card .price {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .card ul {
-            list-style: none;
-            margin-bottom: 30px;
-            color: var(--text-muted);
-        }
-
-        .card ul li {
-            margin-bottom: 10px;
-        }
-
-        .card ul li::before {
-            content: "✓ ";
-            color: var(--blue);
-            font-weight: bold;
-        }
-
-        .card.elite ul li::before {
-            color: var(--gold);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            border-top: 1px solid var(--border-color);
-            margin-top: 50px;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        footer a {
-            color: var(--gold);
-            text-decoration: none;
-        }
+        @media (max-width: 768px) { .hero h1 { font-size: 36px; } }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">
-            <div class="logo-icon"></div>
+            <img src="logo.png" alt="VocalDrop Logo">
             VOCALDROP
         </div>
     </nav>
 
-    <section class="hero">
-        <h1>A.I. Studio Master</h1>
-        <p>Aísla voces, coros e instrumentales de cualquier canción con calidad de estudio utilizando modelos avanzados de Inteligencia Artificial (Whisper & Demucs) directamente en tu ordenador.</p>
+    <header class="hero">
+        <h1>Tu Estudio de IA Personal</h1>
+        <p>Aísla voces e instrumentos con precisión quirúrgica. Todo el poder de la IA en tu ordenador, sin suscripciones obligatorias a la nube.</p>
         
-        <div class="buttons">
-            <a href="#" class="btn btn-download">⬇ Descargar Demo para Windows</a>
-            <button class="btn btn-disabled" disabled>Usar Versión Nube (Próximamente)</button>
+        <div class="cta-group">
+            <a href="#" class="btn btn-gold">⬇ Descargar Demo Gratuita</a>
+            <span class="btn btn-dark">App en la Nube (Próximamente)</span>
         </div>
-    </section>
+    </header>
 
-    <section class="pricing">
-        <h2>Planes y Licencias</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>FAN</h3>
-                <div class="price">3,99€ /mes</div>
-                <ul>
-                    <li>15 Renders al mes</li>
-                    <li>Extracción de 2 Pistas (Voz / Instrumental)</li>
-                    <li>Marca de agua pequeña</li>
-                    <li>Soporte estándar</li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <h3>PRO</h3>
-                <div class="price">9,99€ /mes</div>
-                <ul>
-                    <li>30 Renders al mes</li>
-                    <li>Extracción de 4 Pistas</li>
-                    <li>Sin marca de agua</li>
-                    <li>Diarización de voces</li>
-                </ul>
-            </div>
+    <div class="toggle-container">
+        <span>Mensual</span>
+        <label class="switch">
+            <input type="checkbox" id="billingToggle">
+            <span class="slider"></span>
+        </label>
+        <span>Anual <span class="save-tag">-20%</span></span>
+    </div>
 
-            <div class="card elite">
-                <h3>ELITE .EXE</h3>
-                <div class="price">29,99€ /mes</div>
-                <ul>
-                    <li>Renders Ilimitados (Local)</li>
-                    <li>Extracción de 6 Pistas + Coros (UVR5)</li>
-                    <li>Uso Comercial Permitido</li>
-                    <li>Efectos Visuales y Logos personalizados</li>
-                </ul>
-            </div>
+    <main class="pricing-grid">
+        <div class="card">
+            <div class="plan-name">GRATIS</div>
+            <div class="price">0€</div>
+            <ul class="features">
+                <li>3 Renders al mes</li>
+                <li>Motor 2 Pistas (Voz/Inst)</li>
+                <li>Marca de agua GRANDE</li>
+                <li>Uso Personal</li>
+            </ul>
+            <a href="#" class="btn btn-dark" style="color: #fff; cursor: pointer;">Actual</a>
         </div>
-    </section>
+
+        <div class="card" style="border-color: var(--accent-cyan);">
+            <div class="plan-name" style="color: var(--accent-cyan);">FAN</div>
+            <div class="price"><span class="amount" data-monthly="3.99" data-yearly="3.33">3.99</span>€<span>/mes</span></div>
+            <ul class="features">
+                <li>15 Renders al mes</li>
+                <li>Marca de agua pequeña</li>
+                <li>Motor 2 Pistas</li>
+                <li>Sin anuncios</li>
+            </ul>
+            <a href="#" class="btn btn-gold" style="background: var(--accent-cyan);">Elegir Fan</a>
+        </div>
+
+        <div class="card featured" style="border-color: var(--accent-blue);">
+            <div class="plan-name" style="color: var(--accent-blue);">PRO (ORO)</div>
+            <div class="price"><span class="amount" data-monthly="9.99" data-yearly="8.33">9.99</span>€<span>/mes</span></div>
+            <ul class="features">
+                <li>30 Renders al mes</li>
+                <li><b>Sin marcas de agua</b></li>
+                <li>Motor 4 Pistas (Drums/Bass...)</li>
+                <li>Diarización de 2 voces</li>
+            </ul>
+            <a href="#" class="btn btn-gold" style="background: var(--accent-blue);">Elegir PRO</a>
+        </div>
+
+        <div class="card" style="border-color: var(--accent-purple);">
+            <div class="plan-name" style="color: var(--accent-purple);">MASTER</div>
+            <div class="price"><span class="amount" data-monthly="19.99" data-yearly="16.66">19.99</span>€<span>/mes</span></div>
+            <ul class="features">
+                <li>150 Renders al mes</li>
+                <li>Exportación 4K Pro</li>
+                <li>Prioridad en cola de render</li>
+                <li>Filtros de Cine premium</li>
+            </ul>
+            <a href="#" class="btn btn-gold" style="background: var(--accent-purple); color: white;">Elegir Master</a>
+        </div>
+
+        <div class="card featured">
+            <div class="plan-name" style="color: var(--accent-gold);">ELITE .EXE</div>
+            <div class="price"><span class="amount" data-monthly="29.99" data-yearly="24.99">29.99</span>€<span>/mes</span></div>
+            <ul class="features">
+                <li><b>Renders Ilimitados</b></li>
+                <li>6 Pistas + Coros (UVR5)</li>
+                <li>Uso Comercial Completo</li>
+                <li>Control Remoto Móvil</li>
+            </ul>
+            <a href="#" class="btn btn-gold">Elegir Elite</a>
+        </div>
+    </main>
 
     <footer>
-        <p>© 2026 VocalDrop Studio. Todos los derechos reservados.</p>
-        <p style="margin-top: 10px;">¿Necesitas ayuda? <a href="mailto:soporte@tudominio.com">Contacta con Soporte</a></p>
+        <p>© 2026 VocalDrop Studio | Procesamiento Local de Alta Fidelidad</p>
+        <p style="margin-top: 10px;">¿Dudas? <a href="mailto:soporte@tudominio.com" style="color: var(--accent-gold);">Contacto de Soporte</a></p>
     </footer>
 
+    <script>
+        const toggle = document.getElementById('billingToggle');
+        const amounts = document.querySelectorAll('.amount');
+        
+        toggle.addEventListener('change', () => {
+            amounts.forEach(span => {
+                const val = toggle.checked ? span.dataset.yearly : span.dataset.monthly;
+                span.innerText = val;
+            });
+        });
+    </script>
 </body>
 </html>
